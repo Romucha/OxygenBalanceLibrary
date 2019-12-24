@@ -1,0 +1,7 @@
+C:\Users\Roman\source\repos\PeriodicTable\PeriodicTable\bin\Debug\netstandard2.0\OxygenBalanceLibrary.deps.json
+C:\Users\Roman\source\repos\PeriodicTable\PeriodicTable\bin\Debug\netstandard2.0\OxygenBalanceLibrary.dll
+C:\Users\Roman\source\repos\PeriodicTable\PeriodicTable\bin\Debug\netstandard2.0\OxygenBalanceLibrary.pdb
+C:\Users\Roman\source\repos\PeriodicTable\PeriodicTable\obj\Debug\netstandard2.0\OxygenBalanceLibrary.AssemblyInfoInputs.cache
+C:\Users\Roman\source\repos\PeriodicTable\PeriodicTable\obj\Debug\netstandard2.0\OxygenBalanceLibrary.AssemblyInfo.cs
+C:\Users\Roman\source\repos\PeriodicTable\PeriodicTable\obj\Debug\netstandard2.0\OxygenBalanceLibrary.dll
+C:\Users\Roman\source\repos\PeriodicTable\PeriodicTable\obj\Debug\netstandard2.0\OxygenBalanceLibrary.pdb
