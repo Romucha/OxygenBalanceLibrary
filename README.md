@@ -1,2 +1,2 @@
 # OxygenBalance
-Set of programs for calculation of oxygen balance of chemical substances
+Class library necessary for calculating oxygen balance and further development.
