@@ -10,7 +10,7 @@ namespace PeriodicTable
     public static class Explosives
     {
         //list of explosives
-        static List<ChemicalSubstance> ChemicalSubstances { get; set; }
+        public static List<ChemicalSubstance> ChemicalSubstances { get; private set; }
 
         //constructor reads file and writes data into ChemicalSubstances
         static Explosives()
@@ -18,7 +18,7 @@ namespace PeriodicTable
             //all information about explosives we get form Table.txt
             var fileName = "Table.txt";
 
-            InputTable inputTable = new InputTable(fileName);
+            var inputTable = new InputTable(fileName);
 
             ChemicalSubstances = new List<ChemicalSubstance>();
             //buffer for text file
@@ -61,6 +61,18 @@ namespace PeriodicTable
         public static void ViewTable()
         {
             ChemicalSubstances.ForEach(Console.WriteLine);            
+        }
+
+        //get explosive by name
+        public static bool TryGetValue(string name, out ChemicalSubstance value)
+        {
+            if (ChemicalSubstances.Count(c => c.Name == name) > 0)
+            {
+                value = ChemicalSubstances.Where(c => c.Name == name).ElementAt(0);
+                return true;
+            }
+            else
+                throw new Exception("There's no such chemical substance named " + name);
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 namespace PeriodicTable
 {
     //class contains information about a single chemical substance
-    class ChemicalSubstance : OxygenBalance
+    public class ChemicalSubstance : OxygenBalance
     {
         //name of chemical substance
         public string Name { get; private set; }
