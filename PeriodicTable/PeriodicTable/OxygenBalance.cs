@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Globalization;
 using System.Text;
 
 //main goal is to calculate oxygen balance of given molecula
@@ -30,6 +31,8 @@ namespace PeriodicTable
         //constructor
         public OxygenBalance(string s)
         {
+            System.Threading.Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+
             //we don't need this if substance has no formula
             if (s == null)
             {
@@ -182,11 +185,11 @@ namespace PeriodicTable
             var output = "";
 
             output += Input + "\n";
-            output += "Atoms:\n";
-            foreach (var a in Atoms)
-            {
-                output += a.Key + " " + a.Value + " " + Table.Weight(a.Key) + "\n";
-            }
+            //output += "Atoms:\n";
+            //foreach (var a in Atoms)
+            //{
+            //    output += a.Key + " " + a.Value + " " + Table.Weight(a.Key) + "\n";
+            //}
 
             output += "Weight = " + $"{Weight:f4}" + "\n";
             output += "Oxygen Balance = " + $"{GetOxygenBalance():f4}" + " %";

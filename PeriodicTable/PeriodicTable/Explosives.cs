@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Linq;
+using System.Globalization;
 
 namespace PeriodicTable
 {
@@ -12,16 +13,33 @@ namespace PeriodicTable
         //list of explosives
         public static List<ChemicalSubstance> ChemicalSubstances;
 
+        //path to file
+        private static string FileName;
+
         //constructor reads file and writes data into ChemicalSubstances
         static Explosives()
         {
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-            //all information about explosives we get form Table.txt
-            var fileName = "Table.txt";
+            //all information about explosives we get form Table            
+            FileName = "Table";
+            //get current culture
+            CultureInfo curCult = System.Threading.Thread.CurrentThread.CurrentUICulture;
 
-            var inputTable = new InputTable(fileName);
+            //create both russian and english files at once
+            var inputTable = new InputTable(FileName);
+            inputTable.CreateTable("ru-RU");
+            inputTable.CreateTable("en-US");
 
+            //create list of chemical substances
             ChemicalSubstances = new List<ChemicalSubstance>();
+            CreateList(curCult);
+        }
+
+        //recreate list of chemical substances after changing culture
+        public static void CreateList(CultureInfo curCult)
+        {
+            //clear list first
+            ChemicalSubstances.Clear();
+            var fileName = FileName + "." + curCult.Name + ".txt";
             //buffer for text file
             var inputStrings = new List<string>();
 
@@ -33,7 +51,7 @@ namespace PeriodicTable
                 {
                     inputStrings.Add(sr.ReadLine());
                 }
-                
+
             }
             inputStrings.Remove(inputStrings.Last());
             //read data from string array and put it into 
