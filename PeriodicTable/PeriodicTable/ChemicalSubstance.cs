@@ -32,7 +32,7 @@ namespace PeriodicTable
             if (Weight != 0.0)
                 return Name + "\n" + base.ToString() + "\n";
             else
-                return Name + "\nOxygenBalance = " + $"{Balance * 100.0:f4}" + " %\n";
+                return Name + "\n"+Localization.GetString("OxygenBalance") + " = " + $"{Balance * 100.0:f4}" + " %\n";
         }
     }
 }

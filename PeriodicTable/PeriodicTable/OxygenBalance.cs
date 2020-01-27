@@ -191,8 +191,8 @@ namespace PeriodicTable
             //    output += a.Key + " " + a.Value + " " + Table.Weight(a.Key) + "\n";
             //}
 
-            output += "Weight = " + $"{Weight:f4}" + "\n";
-            output += "Oxygen Balance = " + $"{GetOxygenBalance():f4}" + " %";
+            output += Localization.GetString("Weight") + " = " + $"{Weight:f4}" + "\n";
+            output += Localization.GetString("OxygenBalance") + " = " + $"{GetOxygenBalance():f4}" + " %";
 
             return output;
         }

@@ -39,7 +39,9 @@ namespace PeriodicTable
         {
             //clear list first
             ChemicalSubstances.Clear();
-            var fileName = FileName + "." + curCult.Name + ".txt";
+            //russian language or default english one
+            var bufName = (curCult.Name == "ru-RU") ? curCult.Name : "en-US";
+            var fileName = FileName + "." + bufName + ".txt";
             //buffer for text file
             var inputStrings = new List<string>();
 
@@ -91,7 +93,7 @@ namespace PeriodicTable
                 return true;
             }
             else
-                throw new Exception("There's no such chemical substance named " + name);
+                throw new Exception(Localization.GetString("NoSubstance") + name);
         }
     }
 }
