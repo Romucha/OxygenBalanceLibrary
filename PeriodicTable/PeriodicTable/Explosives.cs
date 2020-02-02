@@ -16,6 +16,9 @@ namespace PeriodicTable
         //path to file
         private static string FileName;
 
+        //container of methods for work with files
+        private static InputTable inputTable;
+
         //constructor reads file and writes data into ChemicalSubstances
         static Explosives()
         {
@@ -25,7 +28,7 @@ namespace PeriodicTable
             CultureInfo curCult = System.Threading.Thread.CurrentThread.CurrentUICulture;
 
             //create both russian and english files at once
-            var inputTable = new InputTable(FileName);
+            inputTable = new InputTable(FileName);
             inputTable.CreateTable("ru-RU");
             inputTable.CreateTable("en-US");
 
@@ -94,6 +97,19 @@ namespace PeriodicTable
             }
             else
                 throw new Exception(Localization.GetString("NoSubstance") + name);
+        }
+
+        //restore file of explosives to default
+        public static void RestoreTable(CultureInfo curCult)
+        {
+            //delete old file (maybe it would be better to rewrite)
+            var bufName = (curCult.Name == "ru-RU") ? curCult.Name : "en-US";
+            var fileName = FileName + "." + bufName + ".txt";
+            File.Delete(fileName);
+            //create new one
+            inputTable.CreateTable(bufName);
+            //update list
+            CreateList(curCult);
         }
     }
 }

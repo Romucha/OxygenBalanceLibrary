@@ -5,3 +5,4 @@ C:\Users\Roman\source\repos\PeriodicTable\PeriodicTable\obj\Debug\netstandard2.0
 C:\Users\Roman\source\repos\PeriodicTable\PeriodicTable\obj\Debug\netstandard2.0\PeriodicTable.AssemblyInfo.cs
 C:\Users\Roman\source\repos\PeriodicTable\PeriodicTable\obj\Debug\netstandard2.0\PeriodicTable.dll
 C:\Users\Roman\source\repos\PeriodicTable\PeriodicTable\obj\Debug\netstandard2.0\PeriodicTable.pdb
+C:\Users\Roman\source\repos\PeriodicTable\PeriodicTable\obj\Debug\netstandard2.0\PeriodicTable.csprojAssemblyReference.cache
