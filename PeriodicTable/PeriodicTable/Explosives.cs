@@ -111,5 +111,17 @@ namespace PeriodicTable
             //update list
             CreateList(curCult);
         }
+
+        //remove element from file
+        public static void RemoveElement(CultureInfo curCult, string elementName)
+        {
+            var bufName = (curCult.Name == "ru-RU") ? curCult.Name : "en-US";
+            var path = FileName + "." + bufName + ".txt";
+            //rewrite all file, but without string that contains elementName
+            var remove = File.ReadAllLines(path, Encoding.Default).Where(s => !s.Contains(elementName));
+            File.WriteAllLines(path, remove, Encoding.Default);
+            //recreate list of explosives
+            CreateList(curCult);
+        }
     }
 }
