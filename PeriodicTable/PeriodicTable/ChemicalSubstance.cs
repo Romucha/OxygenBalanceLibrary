@@ -17,7 +17,11 @@ namespace PeriodicTable
         public ChemicalSubstance(string name, string formula) : base(formula)
         {
             Name = name;
-            Balance = GetOxygenBalance();
+            var buf = GetOxygenBalance();
+            if (double.IsNaN(buf))
+                throw new Exception();
+            else
+                Balance = GetOxygenBalance();
         }
 
         //this constructor is used when formula isn't given
