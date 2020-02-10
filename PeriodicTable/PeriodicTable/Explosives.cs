@@ -123,5 +123,39 @@ namespace PeriodicTable
             //recreate list of explosives
             CreateList(curCult);
         }
+
+        //add element that has (name, balance) structure to file 
+        public static void AddElementBalance(CultureInfo curCult, string elementName, double balance)
+        {
+            var bufName = (curCult.Name == "ru-RU") ? curCult.Name : "en-US";
+            var path = FileName + "." + bufName + ".txt";
+            using (StreamWriter sr = new StreamWriter(path, true, Encoding.Default))
+            {
+                sr.Write(elementName + " " + balance.ToString(curCult));
+            }
+        }
+
+        //add element that has (name, formula) structure to file        
+        public static void AddElementFormula(CultureInfo curCult, string elementName, string formula)
+        {
+            //we assume that everything else is correct
+            var bufName = (curCult.Name == "ru-RU") ? curCult.Name : "en-US";
+            var path = FileName + "." + bufName + ".txt";
+            using (StreamWriter sr = new StreamWriter(path, true, Encoding.Default))
+            {
+                sr.Write(elementName + " " + formula);
+            }
+        }
+
+        //calculation of part of 3 components
+        public static void GetResult(double b1, double b2,double b3, double d, out double x, out double y, out double z)
+        {
+            //third component dose
+            z = d;
+            //first component dose
+            x = ((100F - d) * b2 + d * b3) / (b2 - b1);
+            //second component dose
+            y = (100F - d - x);            
+        }
     }
 }
