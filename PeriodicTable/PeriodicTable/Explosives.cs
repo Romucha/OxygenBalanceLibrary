@@ -51,12 +51,10 @@ namespace PeriodicTable
             //read substances from file into strings
             using (StreamReader sr = new StreamReader(fileName))
             {
-                string line;
-                while ((line = sr.ReadLine()) != null)
+                while (!sr.EndOfStream)
                 {
                     inputStrings.Add(sr.ReadLine());
                 }
-
             }
             inputStrings.Remove(inputStrings.Last());
             //read data from string array and put it into 
@@ -131,7 +129,7 @@ namespace PeriodicTable
             var path = FileName + "." + bufName + ".txt";
             using (StreamWriter sr = new StreamWriter(path, true, Encoding.Default))
             {
-                sr.Write(elementName + " " + balance.ToString(curCult));
+                sr.WriteLine(elementName + "\t" + balance.ToString(curCult));
             }
         }
 
@@ -143,7 +141,7 @@ namespace PeriodicTable
             var path = FileName + "." + bufName + ".txt";
             using (StreamWriter sr = new StreamWriter(path, true, Encoding.Default))
             {
-                sr.Write(elementName + " " + formula);
+                sr.WriteLine(elementName + "\t" + formula);
             }
         }
 

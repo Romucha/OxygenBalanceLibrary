@@ -192,7 +192,7 @@ namespace PeriodicTable
             //}
 
             output += Localization.GetString("Weight") + " = " + $"{Weight:f4}" + "\n";
-            output += Localization.GetString("OxygenBalance") + " = " + $"{GetOxygenBalance():f4}" + " %";
+            output += Localization.GetString("OxygenBalance") + " = " + $"{GetOxygenBalance():f4}" + "%";
 
             return output;
         }

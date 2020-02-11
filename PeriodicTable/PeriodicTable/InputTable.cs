@@ -108,7 +108,7 @@ namespace PeriodicTable
                                             "Тринитрорезорцин\tC6H(NO2)3(OH)2\n" +
                                             "Тринитротолуол\tC6H2(NO2)3CH3\n" +
                                             "Уголь\tC\n" +
-                                            "Фенол\tC6H5OH\n"
+                                            "Фенол\tC6H5OH"
                                             );
 
             //english
@@ -199,7 +199,7 @@ namespace PeriodicTable
                                             "Trinitroresorcinol\tC6H(NO2)3(OH)2\n" +
                                             "Trinitrotoluene\tC6H2(NO2)3CH3\n" +
                                             "Coal\tC\n" +
-                                            "Phenol\tC6H5OH\n"
+                                            "Phenol\tC6H5OH"
                                             );
 
             TableName = tableName;
