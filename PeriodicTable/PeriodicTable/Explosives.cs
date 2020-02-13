@@ -131,6 +131,7 @@ namespace PeriodicTable
             {
                 sr.WriteLine(elementName + "\t" + balance.ToString(curCult));
             }
+            ChemicalSubstances.Add(new ChemicalSubstance(elementName, balance));
         }
 
         //add element that has (name, formula) structure to file        
@@ -143,6 +144,7 @@ namespace PeriodicTable
             {
                 sr.WriteLine(elementName + "\t" + formula);
             }
+            ChemicalSubstances.Add(new ChemicalSubstance(elementName, formula));
         }
 
         //calculation of part of 3 components
