@@ -56,7 +56,7 @@ namespace PeriodicTable
                     inputStrings.Add(sr.ReadLine());
                 }
             }
-            inputStrings.Remove(inputStrings.Last());
+            //inputStrings.Remove(inputStrings.Last());
             //read data from string array and put it into 
             foreach (var i in inputStrings)
             {
@@ -145,6 +145,17 @@ namespace PeriodicTable
                 sr.WriteLine(elementName + "\t" + formula);
             }
             ChemicalSubstances.Add(new ChemicalSubstance(elementName, formula));
+        }
+
+        //add extra line to a file
+        public static void AddLine(CultureInfo curCult)
+        {
+            var bufName = (curCult.Name == "ru-RU") ? curCult.Name : "en-US";
+            var path = FileName + "." + bufName + ".txt";
+            using (StreamWriter sr = new StreamWriter(path, true, Encoding.Default))
+            {
+                sr.Write(Environment.NewLine);
+            }
         }
 
         //calculation of part of 3 components
