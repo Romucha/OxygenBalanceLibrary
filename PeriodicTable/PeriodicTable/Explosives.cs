@@ -56,7 +56,6 @@ namespace PeriodicTable
                     inputStrings.Add(sr.ReadLine());
                 }
             }
-            //inputStrings.Remove(inputStrings.Last());
             //read data from string array and put it into 
             foreach (var i in inputStrings)
             {
