@@ -14,27 +14,30 @@ namespace PeriodicTable
         public static List<ChemicalSubstance> ChemicalSubstances;
 
         //path to file
-        private static string FileName;
+        private static string fileName;
 
         //container of methods for work with files
         private static InputTable inputTable;
+
+        //current culture
+        public static CultureInfo CurCult;
 
         //constructor reads file and writes data into ChemicalSubstances
         static Explosives()
         {
             //all information about explosives we get form Table            
-            FileName = "Table";
+            fileName = "Table";
             //get current culture
-            CultureInfo curCult = System.Threading.Thread.CurrentThread.CurrentUICulture;
+            CurCult = System.Threading.Thread.CurrentThread.CurrentUICulture;
 
             //create both russian and english files at once
-            inputTable = new InputTable(FileName);
+            inputTable = new InputTable(fileName);
             inputTable.CreateTable("ru-RU");
             inputTable.CreateTable("en-US");
 
             //create list of chemical substances
             ChemicalSubstances = new List<ChemicalSubstance>();
-            CreateList(curCult);
+            CreateList(CurCult);
         }
 
         //recreate list of chemical substances after changing culture
@@ -42,9 +45,11 @@ namespace PeriodicTable
         {
             //clear list first
             ChemicalSubstances.Clear();
+            //culture update
+            CurCult = curCult;
             //russian language or default english one
             var bufName = (curCult.Name == "ru-RU") ? curCult.Name : "en-US";
-            var fileName = FileName + "." + bufName + ".txt";
+            var fileName = Explosives.fileName + "." + bufName + ".txt";
             //buffer for text file
             var inputStrings = new List<string>();
 
@@ -67,7 +72,7 @@ namespace PeriodicTable
                 //depending on given data
                 //we either add an explsoive with name and balance
                 //or one with name and formula and calculate oxygen balance within constructor
-                if (double.TryParse(bufS[1], out bufBalance))
+                if (double.TryParse(bufS[1], NumberStyles.Number, CurCult, out bufBalance))
                 {
                     ChemicalSubstances.Add(new ChemicalSubstance(bufS[0], bufBalance));
                 }
@@ -97,35 +102,35 @@ namespace PeriodicTable
         }
 
         //restore file of explosives to default
-        public static void RestoreTable(CultureInfo curCult)
+        public static void RestoreTable()
         {
             //delete old file (maybe it would be better to rewrite)
-            var bufName = (curCult.Name == "ru-RU") ? curCult.Name : "en-US";
-            var fileName = FileName + "." + bufName + ".txt";
+            var bufName = (CurCult.Name == "ru-RU") ? CurCult.Name : "en-US";
+            var fileName = Explosives.fileName + "." + bufName + ".txt";
             File.Delete(fileName);
             //create new one
             inputTable.CreateTable(bufName);
             //update list
-            CreateList(curCult);
+            CreateList(CurCult);
         }
 
         //remove element from file
-        public static void RemoveElement(CultureInfo curCult, string elementName)
+        public static void RemoveElement(string elementName)
         {
-            var bufName = (curCult.Name == "ru-RU") ? curCult.Name : "en-US";
-            var path = FileName + "." + bufName + ".txt";
+            var bufName = (CurCult.Name == "ru-RU") ? CurCult.Name : "en-US";
+            var path = fileName + "." + bufName + ".txt";
             //rewrite all file, but without string that contains elementName
             var remove = File.ReadAllLines(path, Encoding.Default).Where(s => !s.Contains(elementName));
             File.WriteAllLines(path, remove, Encoding.Default);
             //recreate list of explosives
-            CreateList(curCult);
+            CreateList(CurCult);
         }
 
         //add element that has (name, balance) structure to file 
         public static void AddElementBalance(CultureInfo curCult, string elementName, double balance)
         {
             var bufName = (curCult.Name == "ru-RU") ? curCult.Name : "en-US";
-            var path = FileName + "." + bufName + ".txt";
+            var path = fileName + "." + bufName + ".txt";
             using (StreamWriter sr = new StreamWriter(path, true, Encoding.Default))
             {
                 sr.WriteLine(elementName + "\t" + balance.ToString(curCult));
@@ -134,28 +139,17 @@ namespace PeriodicTable
         }
 
         //add element that has (name, formula) structure to file        
-        public static void AddElementFormula(CultureInfo curCult, string elementName, string formula)
+        public static void AddElementFormula(string elementName, string formula)
         {
             //we assume that everything else is correct
-            var bufName = (curCult.Name == "ru-RU") ? curCult.Name : "en-US";
-            var path = FileName + "." + bufName + ".txt";
+            var bufName = (CurCult.Name == "ru-RU") ? CurCult.Name : "en-US";
+            var path = fileName + "." + bufName + ".txt";
             using (StreamWriter sr = new StreamWriter(path, true, Encoding.Default))
             {
                 sr.WriteLine(elementName + "\t" + formula);
             }
             ChemicalSubstances.Add(new ChemicalSubstance(elementName, formula));
-        }
-
-        //add extra line to a file
-        public static void AddLine(CultureInfo curCult)
-        {
-            var bufName = (curCult.Name == "ru-RU") ? curCult.Name : "en-US";
-            var path = FileName + "." + bufName + ".txt";
-            using (StreamWriter sr = new StreamWriter(path, true, Encoding.Default))
-            {
-                sr.Write(Environment.NewLine);
-            }
-        }
+        }        
 
         //calculation of part of 3 components
         public static void GetResult(double b1, double b2,double b3, double d, out double x, out double y, out double z)

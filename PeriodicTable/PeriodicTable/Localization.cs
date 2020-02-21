@@ -44,7 +44,7 @@ namespace PeriodicTable
             //clear working dictionary
             //check culture
             //set new working dictionary                
-            if (System.Threading.Thread.CurrentThread.CurrentUICulture.Name == "ru-RU")
+            if (Explosives.CurCult.Name == "ru-RU")
             {
                 Local = LocalRus;
             }

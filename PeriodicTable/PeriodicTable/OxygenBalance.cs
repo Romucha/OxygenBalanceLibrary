@@ -31,8 +31,6 @@ namespace PeriodicTable
         //constructor
         public OxygenBalance(string s)
         {
-            System.Threading.Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
-
             //we don't need this if substance has no formula
             if (s == null)
             {
@@ -155,7 +153,7 @@ namespace PeriodicTable
                 }
                 //if subtring doesn't match regular expression we throw new excpetion
                 else
-                    throw new Exception();
+                    throw new Exception(this.Input);
             }
         }
 
@@ -191,8 +189,8 @@ namespace PeriodicTable
             //    output += a.Key + " " + a.Value + " " + Table.Weight(a.Key) + "\n";
             //}
 
-            output += Localization.GetString("Weight") + " = " + $"{Weight:f4}" + "\n";
-            output += Localization.GetString("OxygenBalance") + " = " + $"{GetOxygenBalance():f4}" + "%";
+            output += Localization.GetString("Weight") + " = " + Weight.ToString("F4", Explosives.CurCult) + "\n";
+            output += Localization.GetString("OxygenBalance") + " = " + GetOxygenBalance().ToString("F4", Explosives.CurCult) + "%";
 
             return output;
         }
